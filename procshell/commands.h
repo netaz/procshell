@@ -20,14 +20,24 @@ public:
     virtual const char* name() const = 0;
 };
 
+/*
+ * Define a string ordering so we can later traverse the commands in order
+ */
+struct string_cmp {
+    bool operator()(const char *a, const char *b) {
+        return strcmp(a, b) < 0 ? true : false;
+    }
+};
 
 class CommandInterpreter : public TerminalListener {
     Terminal &mTerm;
-    std::map<const char*, ShellCommand&> mCmds;
+    std::map<const char*, ShellCommand&, string_cmp> mCmds;
 public:
     CommandInterpreter(Terminal &term) : mTerm(term) {}
-    void registerCommnad(ShellCommand &cmd);
+    void registerCommand(ShellCommand &cmd);
     bool handleTerminalAction(KeyMap::TerminalAction action, LineEditor &editor);
+    // Perform a partial string search and return all matches
+    std::vector<std::string> find(const std::string &match) const;
 };
 
 

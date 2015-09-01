@@ -32,6 +32,20 @@ bool CommandInterpreter::handleTerminalAction(KeyMap::TerminalAction action, Lin
     return false;
 }
 
-void CommandInterpreter::registerCommnad(ShellCommand &cmd) {
+void CommandInterpreter::registerCommand(ShellCommand &cmd) {
     mCmds.insert( std::pair<const char*, ShellCommand&>(cmd.name(), cmd) );
+}
+
+std::vector<std::string> CommandInterpreter::find(const std::string &match) const {
+    std::vector<std::string> ret;
+    if (match.size() == 0)
+        return ret;
+
+    std::map<const char*, ShellCommand&>::const_iterator it = mCmds.begin();
+    for (; it != mCmds.end(); it++) {
+        if (0 == strncmp(match.c_str(), it->first, match.size()))
+            ret.push_back(it->first);
+    }
+
+    return ret;
 }
