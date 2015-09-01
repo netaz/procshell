@@ -1,5 +1,5 @@
 /*
- * This file contains a sample command (history) and a sample shell
+ * This file contains a sample shell
  * 
  * For license information, please refer to procshell.h
  */
@@ -8,46 +8,31 @@
 #include <vector>
 #include "../procshell.h"
 #include "../extensions/auto_complete.h"
+#include "../commands/cmd_history.h"
+#include "../commands/cmd_exit.h"
 
 #ifdef _WIN32
 #include "stdafx.h"
 #endif
 
 /*
- * This sample command provides access to the History from the command-line
- */
-
-class HistoryCmd : public ShellCommand {
-    Terminal &mTerm;
-    History &mHistory;
-public:
-    HistoryCmd(Terminal &term, History &history) : mTerm(term), mHistory(history) {}
-    const char* name() const { return "history"; }
-    void handleCommand(const std::vector<std::string> &args);
-};
-
-void HistoryCmd::handleCommand(const std::vector<std::string> &args) {
-    std::string cmd;
-    size_t i = 0;
-    while (mHistory.getCmdString(i++, cmd))
-        mTerm.puts(cmd.c_str(), true);
-}
-
-
-/*
  * This sample shows how a shell with some basic functionality is assembled
+ *
  */
 
 int shell(Terminal &term) {
     LineEditor editor(15);
     KeyMap::TerminalAction action;
     History history(10);
-    AutoComplete complete;
     CommandInterpreter interpreter(term);
+    AutoComplete complete(interpreter);
     HistoryCmd historyCmd(term, history);
-    interpreter.registerCommnad(historyCmd);
+    bool exit;
+    ExitCmd exitCmd(term, exit);
+    interpreter.registerCommand(historyCmd);
+    interpreter.registerCommand(exitCmd);
 
-    while (1) {
+    while (!exit) {
         action = term.collectInput(editor);
 
         switch (action) {

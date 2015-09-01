@@ -54,6 +54,9 @@
     <ClInclude Include="commands\cmd_history.h">
       <Filter>Source Files\commands</Filter>
     </ClInclude>
+    <ClInclude Include="commands\cmd_exit.h">
+      <Filter>Source Files\commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windows.cpp">

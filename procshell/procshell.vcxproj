@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="commands.h" />
+    <ClInclude Include="commands\cmd_exit.h" />
     <ClInclude Include="commands\cmd_history.h" />
     <ClInclude Include="editor.h" />
     <ClInclude Include="examples\stdafx.h" />
