@@ -50,9 +50,18 @@
  * TerminalActions.  This mapping mechanism provides loose-coupling between the main 
  * ProcShell abstractions and the terminal implementation.
  * 
- * Historry stores a cyclic list of the latest executed commands and provides an interface
+ * History stores a cyclic list of the latest executed commands and provides an interface
  * to navigate this list.  I've made History part of the procshell core, although it could
  * have very well been an extension.  Of course, as you assemble your 
+ *
+ * For a discussion of an actual Linux shell, see:
+ * http://www.kitebird.com/csh-tcsh-book/csh-intro.pdf
+ *
+ * Most Telnet programs implement a shell.  Microsoft's Telnet shell commands are described
+ * here: https://technet.microsoft.com/en-us/library/bb491013.aspx
+ *
+ * Cisco routers provide a CLI for managing the device.  Some documentation with examples:
+ * http://www.cisco.com/c/en/us/td/docs/routers/access/1900/software/configuration/guide/Software_Configuration/routconf.html
  */
 #ifndef __PROCSHELL_H
 #define __PROCSHELL_H
