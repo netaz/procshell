@@ -14,7 +14,9 @@
  * See: https://en.wikipedia.org/wiki/Comparison_of_command_shells#Completions
  */
 class AutoComplete : public TerminalListener {
+    CommandInterpreter &mInterpreter;
 public:
+    AutoComplete(CommandInterpreter &interpreter) : mInterpreter(interpreter) {}
     bool handleTerminalAction(KeyMap::TerminalAction action, LineEditor &editor);
 };
 
