@@ -19,6 +19,9 @@
     <Filter Include="Source Files\examples">
       <UniqueIdentifier>{6476914d-8c03-4f33-ac51-f85f1d3479da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\commands">
+      <UniqueIdentifier>{8a2617e1-4a44-4af9-aa44-c191d36f239e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="terminal.h">
@@ -48,6 +51,9 @@
     <ClInclude Include="examples\targetver.h">
       <Filter>Source Files\examples</Filter>
     </ClInclude>
+    <ClInclude Include="commands\cmd_history.h">
+      <Filter>Source Files\commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windows.cpp">
@@ -60,9 +66,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="keymap.cpp">
@@ -81,6 +84,12 @@
       <Filter>Source Files\examples</Filter>
     </ClCompile>
     <ClCompile Include="examples\stdafx.cpp">
+      <Filter>Source Files\examples</Filter>
+    </ClCompile>
+    <ClCompile Include="commands\cmd_history.cpp">
+      <Filter>Source Files\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\shell_example2.cpp">
       <Filter>Source Files\examples</Filter>
     </ClCompile>
   </ItemGroup>

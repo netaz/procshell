@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="commands.h" />
+    <ClInclude Include="commands\cmd_history.h" />
     <ClInclude Include="editor.h" />
     <ClInclude Include="examples\stdafx.h" />
     <ClInclude Include="examples\targetver.h" />
@@ -89,9 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="commands.cpp" />
+    <ClCompile Include="commands\cmd_history.cpp" />
     <ClCompile Include="editor.cpp" />
-    <ClCompile Include="example.cpp" />
     <ClCompile Include="examples\shell_example1.cpp" />
+    <ClCompile Include="examples\shell_example2.cpp" />
     <ClCompile Include="examples\stdafx.cpp" />
     <ClCompile Include="extensions\auto_complete.cpp" />
     <ClCompile Include="history.cpp" />
