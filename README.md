@@ -16,17 +16,15 @@ because concepts are often used interchangibly.  This is how I interpret the con
 - The terminal is the frontend, while the shell is the backend.
 
 Abstractions (class names are capitalized):
-A Terminal provides means for text input/output.  For example, a LocalTerminal 
+- A Terminal provides means for text input/output.  For example, a LocalTerminal 
 uses the keyboard and screen for I/O, while (the incomplete) TelnetTerminal uses
 a Telnet connection for I/O with a remote keyboard and screen.  A Terminal uses 
 a LineEditor to manage the editing of the current command-line.  
-
-A Keymap maps key-strokes to a well-known set of TerminalActions.  This mapping is
+- A Keymap maps key-strokes to a well-known set of TerminalActions.  This mapping is
 not restricted to physical keys-strokes, as in the case of mapping VT100 codes to
 TerminalActions.  This mapping mechanism provides loose-coupling between the main 
 ProcShell abstractions and the terminal implementation.
-
-History stores a cyclic list of the latest executed commands and provides an interface
+- History stores a cyclic list of the latest executed commands and provides an interface
 to navigate this list.  I've made History part of the procshell core, although it could
 have very well been an extension.  Of course, as you assemble your 
 
