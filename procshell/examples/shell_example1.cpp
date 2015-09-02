@@ -25,7 +25,7 @@ int shell(Terminal &term) {
     KeyMap::TerminalAction action;
     History history(10);
     CommandInterpreter interpreter(term);
-    AutoComplete complete(interpreter);
+    AutoComplete complete(interpreter, term);
     HistoryCmd historyCmd(term, history);
     bool exit;
     ExitCmd exitCmd(term, exit);

@@ -8,6 +8,7 @@
 #define __AUTO_COMPLETE_H
 
 #include "../procshell.h"
+#include "../terminal.h"
 
 /*
  * Command name completion
@@ -15,8 +16,13 @@
  */
 class AutoComplete : public TerminalListener {
     CommandInterpreter &mInterpreter;
+    Terminal &mTerm;
+    bool mExactMatch;
 public:
-    AutoComplete(CommandInterpreter &interpreter) : mInterpreter(interpreter) {}
+    AutoComplete(CommandInterpreter &interpreter, Terminal &term, bool exactMatch=true) : 
+        mInterpreter(interpreter), 
+        mTerm(term),
+        mExactMatch(exactMatch) {}
     bool handleTerminalAction(KeyMap::TerminalAction action, LineEditor &editor);
 };
 
