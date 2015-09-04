@@ -28,6 +28,19 @@ ProcShell abstractions and the terminal implementation.
 to navigate this list.  I've made History part of the procshell core, although it could
 have very well been an extension.  Of course, as you assemble your 
 
+Features:
+- Local terminal 
+- Telnet server terminal
+- Command line editing
+- Command history
+- Configurable key bindings
+- Modular design allowing high configurability of features
+- Sample shells
+
+Extensions:
+- Command auto completion (exact, fuzzy)
+- Command aliasing
+
 For a discussion of an actual Linux shell, see:
 http://www.kitebird.com/csh-tcsh-book/csh-intro.pdf
 
