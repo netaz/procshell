@@ -11,13 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{38DEE159-62D1-4B2F-A1A8-1035D52EC7F4}</ProjectGuid>
+    <ProjectGuid>{4784A9D7-7744-48EF-83D7-D9B3EB9DC1C3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>procshell</RootNamespace>
+    <RootNamespace>shell1</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -52,11 +52,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\nzmora\Documents\GitHub\procshell\procshell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\nzmora\Documents\GitHub\procshell\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>procshell.lib;Ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,28 +79,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="commands.h" />
-    <ClInclude Include="commands\cmd_exit.h" />
-    <ClInclude Include="commands\cmd_history.h" />
-    <ClInclude Include="editor.h" />
-    <ClInclude Include="extensions\alias.h" />
-    <ClInclude Include="extensions\auto_complete.h" />
-    <ClInclude Include="history.h" />
-    <ClInclude Include="keymap.h" />
-    <ClInclude Include="procshell.h" />
-    <ClInclude Include="terminal.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="commands.cpp" />
-    <ClCompile Include="commands\cmd_history.cpp" />
-    <ClCompile Include="editor.cpp" />
-    <ClCompile Include="extensions\alias.cpp" />
-    <ClCompile Include="extensions\auto_complete.cpp" />
-    <ClCompile Include="history.cpp" />
-    <ClCompile Include="keymap.cpp" />
-    <ClCompile Include="local_terminal.cpp" />
-    <ClCompile Include="telnet_terminal.cpp" />
-    <ClCompile Include="windows.cpp" />
+    <ClCompile Include="shell1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

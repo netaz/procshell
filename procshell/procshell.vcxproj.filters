@@ -16,9 +16,6 @@
     <Filter Include="Source Files\extensions">
       <UniqueIdentifier>{c36fb90a-247b-40fd-bd08-c94f304ece72}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\examples">
-      <UniqueIdentifier>{6476914d-8c03-4f33-ac51-f85f1d3479da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\commands">
       <UniqueIdentifier>{8a2617e1-4a44-4af9-aa44-c191d36f239e}</UniqueIdentifier>
     </Filter>
@@ -44,12 +41,6 @@
     </ClInclude>
     <ClInclude Include="extensions\auto_complete.h">
       <Filter>Source Files\extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="examples\stdafx.h">
-      <Filter>Source Files\examples</Filter>
-    </ClInclude>
-    <ClInclude Include="examples\targetver.h">
-      <Filter>Source Files\examples</Filter>
     </ClInclude>
     <ClInclude Include="commands\cmd_history.h">
       <Filter>Source Files\commands</Filter>
@@ -86,17 +77,8 @@
     <ClCompile Include="extensions\auto_complete.cpp">
       <Filter>Source Files\extensions</Filter>
     </ClCompile>
-    <ClCompile Include="examples\shell_example1.cpp">
-      <Filter>Source Files\examples</Filter>
-    </ClCompile>
-    <ClCompile Include="examples\stdafx.cpp">
-      <Filter>Source Files\examples</Filter>
-    </ClCompile>
     <ClCompile Include="commands\cmd_history.cpp">
       <Filter>Source Files\commands</Filter>
-    </ClCompile>
-    <ClCompile Include="examples\shell_example2.cpp">
-      <Filter>Source Files\examples</Filter>
     </ClCompile>
     <ClCompile Include="extensions\alias.cpp">
       <Filter>Source Files\extensions</Filter>

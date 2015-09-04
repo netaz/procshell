@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "procshell", "procshell\procshell.vcxproj", "{38DEE159-62D1-4B2F-A1A8-1035D52EC7F4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shell1", "procshell\examples\shell1\shell1.vcxproj", "{4784A9D7-7744-48EF-83D7-D9B3EB9DC1C3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shell2", "procshell\examples\shell2\shell2.vcxproj", "{C10AD951-1646-447D-A172-259C4E83827B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +19,14 @@ Global
 		{38DEE159-62D1-4B2F-A1A8-1035D52EC7F4}.Debug|Win32.Build.0 = Debug|Win32
 		{38DEE159-62D1-4B2F-A1A8-1035D52EC7F4}.Release|Win32.ActiveCfg = Release|Win32
 		{38DEE159-62D1-4B2F-A1A8-1035D52EC7F4}.Release|Win32.Build.0 = Release|Win32
+		{4784A9D7-7744-48EF-83D7-D9B3EB9DC1C3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4784A9D7-7744-48EF-83D7-D9B3EB9DC1C3}.Debug|Win32.Build.0 = Debug|Win32
+		{4784A9D7-7744-48EF-83D7-D9B3EB9DC1C3}.Release|Win32.ActiveCfg = Release|Win32
+		{4784A9D7-7744-48EF-83D7-D9B3EB9DC1C3}.Release|Win32.Build.0 = Release|Win32
+		{C10AD951-1646-447D-A172-259C4E83827B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C10AD951-1646-447D-A172-259C4E83827B}.Debug|Win32.Build.0 = Debug|Win32
+		{C10AD951-1646-447D-A172-259C4E83827B}.Release|Win32.ActiveCfg = Release|Win32
+		{C10AD951-1646-447D-A172-259C4E83827B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

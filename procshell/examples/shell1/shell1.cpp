@@ -1,25 +1,25 @@
 /*
- * This file contains a sample shell
- * 
- * For license information, please refer to procshell.h
- */
+* This file contains a sample shell
+*
+* For license information, please refer to procshell.h
+*/
 #include <string>
 #include <algorithm>
 #include <vector>
-#include "../procshell.h"
-#include "../extensions/auto_complete.h"
-#include "../extensions/alias.h"
-#include "../commands/cmd_history.h"
-#include "../commands/cmd_exit.h"
+#include "procshell.h"
+#include "extensions/auto_complete.h"
+#include "extensions/alias.h"
+#include "commands/cmd_history.h"
+#include "commands/cmd_exit.h"
 
 #ifdef _WIN32
-#include "stdafx.h"
+//#include "stdafx.h"
 #endif
 
 /*
- * This sample shows how a shell with some basic functionality is assembled
- *
- */
+* This sample shows how a shell with some basic functionality is assembled
+*
+*/
 
 int shell(Terminal &term) {
     LineEditor editor(50);
@@ -88,4 +88,3 @@ int main(int argc, const char* argv[])
     //    return LaunchTelnetCLI();
     return LaunchLocalCLI();
 }
-
