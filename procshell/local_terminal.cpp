@@ -5,6 +5,8 @@
 
 Terminal::Terminal(const std::string prompt) : mPrompt(prompt) {}
 
+void Terminal::prompt(const std::string prompt) { mPrompt = prompt;  }
+
 void Terminal::LF() {
     putch('\n');
 }

@@ -23,9 +23,10 @@ protected:
     virtual void repositionPrinter(LineEditor &editor);
     virtual void printEditLine(LineEditor &editor, bool erase_char = false);
     virtual KeyMap::TerminalAction handleEditAction(KeyMap::TerminalAction action, LineEditor &editor,
-                                               bool &escape, unsigned char c);
+                                                    bool &escape, unsigned char c);
 public:
     Terminal(const std::string prompt);
+    void prompt(const std::string prompt);
     virtual KeyMap::TerminalAction collectInput(LineEditor &editor) = 0;
     virtual int putch(char c) = 0;
     virtual unsigned char getch() = 0;
