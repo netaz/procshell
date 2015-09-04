@@ -23,6 +23,8 @@ class Shell2 {
     bool mExit;
     
     void registerCmds();
+    void executeInitScript();
+
 public:
     Shell2(Terminal &term) : mTerm(term), mEditor(50), mHistory(10), mInterpreter(term), mExit(false) {
         mAutoComplete = new AutoComplete(mInterpreter, term);
@@ -30,12 +32,20 @@ public:
     }
 
     void run();
+
+    class SetCmd : public ShellCommand {
+    public:
+        void handleCommand(const std::vector<std::string> &args);
+        const char* name() const { return "set"; }
+    };
+
 };
 
 void Shell2::registerCmds() {
     ShellCommand *cmds[] = {
         new HistoryCmd(mTerm, mHistory),
-        new ExitCmd(mTerm, mExit)
+        new ExitCmd(mTerm, mExit),
+        new Shell2::SetCmd(),
     };
 
     for (auto cmd : cmds) {
@@ -43,10 +53,23 @@ void Shell2::registerCmds() {
     }
 }
 
+// Just like ~/.bashrc, you might one to run a script before starting your shell
+void Shell2::executeInitScript() {
+    const char *script[] = { "alias quit exit", };
+
+    // Let the CLI interpreter interpret line by line from the script (I'm not checking for errors)
+    LineEditor editor(50);
+    for (auto line : script) {
+        editor.set(line);
+        mInterpreter.handleTerminalAction(KeyMap::TerminalAction::ACTION_DONE, editor);
+    }
+}
+
 void Shell2::run() {
     registerCmds();
+    executeInitScript();
+    
     KeyMap::TerminalAction action;
-
     while (!mExit) {
         action = mTerm.collectInput(mEditor);
 
@@ -67,13 +90,20 @@ void Shell2::run() {
 
         case KeyMap::TerminalAction::ACTION_DONE:
             mTerm.LF(); mTerm.CR();
+            // insert command line to the history
             mHistory.handleTerminalAction(action, mEditor);
+            // replace aliased commands with their alias value
             mAlias->handleTerminalAction(action, mEditor);
+            // let the interpreter do its thing
             mInterpreter.handleTerminalAction(action, mEditor);
             mEditor.clear();
             break;
         }
     }
+}
+
+void Shell2::SetCmd::handleCommand(const std::vector<std::string> &args) {
+    
 }
 
 int main(int argc, const char* argv[])
