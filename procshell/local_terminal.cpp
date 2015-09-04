@@ -95,11 +95,10 @@ KeyMap::TerminalAction Terminal::handleEditAction(KeyMap::TerminalAction action,
     return KeyMap::TerminalAction::ACTION_IGNORE;
 }
 
-LocalTerminal::LocalTerminal(const std::string &prompt, TerminalListener *listener) :
+LocalTerminal::LocalTerminal(const std::string &prompt) :
     Terminal(prompt),
     mInDev(stdin),
-    mOutDev(stdout),
-    mListener(listener) {
+    mOutDev(stdout) {
 }
 
 KeyMap::TerminalAction LocalTerminal::collectInput(LineEditor &editor) {

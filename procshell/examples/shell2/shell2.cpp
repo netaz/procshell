@@ -78,7 +78,7 @@ void Shell2::run() {
 
 int main(int argc, const char* argv[])
 {
-    LocalTerminal term("shell2> ", 0);
+    LocalTerminal term("shell2> ");
     Shell2 shell(term);
     shell.run();
     return EXIT_SUCCESS;

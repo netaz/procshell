@@ -57,7 +57,7 @@ enum Options
 };
 
 
-TelnetTerminal::TelnetTerminal(int sock, const std::string &prompt, TerminalListener *listener) :
+TelnetTerminal::TelnetTerminal(int sock, const std::string &prompt) :
     Terminal(prompt), 
     mSock(sock),
     mVt100KeyMap(*this) {

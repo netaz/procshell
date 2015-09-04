@@ -41,10 +41,9 @@ class LocalTerminal : public Terminal {
     FILE *mInDev;
     FILE *mOutDev;
     DosKeyMap mKeyMap;
-    TerminalListener *mListener;
     
 public:
-    LocalTerminal(const std::string &prompt, TerminalListener *listener);
+    LocalTerminal(const std::string &prompt);
     KeyMap::TerminalAction collectInput(LineEditor &editor);
     int putch(char c);
     unsigned char getch();
@@ -63,7 +62,7 @@ class TelnetTerminal : public Terminal {
     void NL() { CR(); LF(); }  // new line
 
 public:
-    TelnetTerminal(int sock, const std::string &prompt, TerminalListener *listener);
+    TelnetTerminal(int sock, const std::string &prompt);
     ~TelnetTerminal();
     KeyMap::TerminalAction TelnetTerminal::collectInput(LineEditor &editor);
     int putch(char c);
