@@ -94,6 +94,9 @@ void Shell2::run() {
 
         case KeyMap::TerminalAction::ACTION_DONE:
             mTerm.LF(); mTerm.CR();
+            if (mEditor.buf().size() == 0)
+                break;
+
             // insert command line to the history
             mHistory.handleTerminalAction(action, mEditor);
             // replace aliased commands with their alias value

@@ -54,6 +54,8 @@ int shell(Terminal &term) {
 
         case KeyMap::TerminalAction::ACTION_DONE:
             term.LF(); term.CR();
+            if (editor.buf().size() == 0)
+                break;
             history.handleTerminalAction(action, editor);
             alias.handleTerminalAction(action, editor);
             interpreter.handleTerminalAction(action, editor);
