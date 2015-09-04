@@ -32,14 +32,14 @@ public:
     }
 
     void run();
-    bool handleSetCommand(const std::vector<std::string> &args);
+    ShellCommand::CommandStatus handleSetCommand(const std::vector<std::string> &args);
 
     // 'set' built-in command, which alters the internal configuration of the shell itself.
     class SetCmd : public ShellCommand {
         Shell2 &mShell;
     public:
         SetCmd(Shell2 &shell) : mShell(shell) {}
-        void handleCommand(const std::vector<std::string> &args) { mShell.handleSetCommand(args); }
+        CommandStatus handleCommand(const std::vector<std::string> &args) { return mShell.handleSetCommand(args); }
         const char* name() const { return "set"; }
     };
 
@@ -109,21 +109,21 @@ void Shell2::run() {
     }
 }
 
-bool Shell2::handleSetCommand(const std::vector<std::string> &args) {
+ShellCommand::CommandStatus Shell2::handleSetCommand(const std::vector<std::string> &args) {
     if (args.size()>2 && args[1].compare("prompt") == 0) {
         if (args.size() == 4 && args[2].compare("=")==0) {
             // syntax: 'set prompt = arg[3] '
             mTerm.prompt(args[3]);
-            return true;
+            return ShellCommand::CommandSuccess;
         }
         if (args.size() == 3) {
             // syntax: 'set prompt arg[2] '
             mTerm.prompt(args[2]);
-            return true;
+            return ShellCommand::CommandSuccess;
         }
     }
     
-    return false;
+    return ShellCommand::CommandFailure_BadParams;
 }
 
 int main(int argc, const char* argv[])

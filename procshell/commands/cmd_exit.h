@@ -10,8 +10,9 @@ class ExitCmd : public ShellCommand {
 public:
     ExitCmd(Terminal &term, bool &exit) : mTerm(term), mExitFlag(exit) { exit = false; }
     const char* name() const { return "exit"; }
-    void handleCommand(const std::vector<std::string> &args) {
+    CommandStatus handleCommand(const std::vector<std::string> &args) {
         mExitFlag = true;
+        return ShellCommand::CommandSuccess;
     }
 };
 

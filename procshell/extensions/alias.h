@@ -21,7 +21,7 @@ public:
     Alias(CommandInterpreter &interpreter, Terminal &term);
     bool handleTerminalAction(KeyMap::TerminalAction action, LineEditor &editor);
     const char* name() const { return "alias"; }
-    void handleCommand(const std::vector<std::string> &args);
+    CommandStatus handleCommand(const std::vector<std::string> &args);
 };
 
 #endif // __ALIAS_H

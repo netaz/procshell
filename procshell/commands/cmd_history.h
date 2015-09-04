@@ -16,7 +16,7 @@ class HistoryCmd : public ShellCommand {
 public:
     HistoryCmd(Terminal &term, History &history) : mTerm(term), mHistory(history) {}
     const char* name() const { return "history"; }
-    void handleCommand(const std::vector<std::string> &args);
+    CommandStatus handleCommand(const std::vector<std::string> &args);
 };
 
 #endif // __CMD_HISTORY_H

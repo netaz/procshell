@@ -20,12 +20,13 @@ bool Alias::handleTerminalAction(KeyMap::TerminalAction action, LineEditor &edit
     return false;
 }
 
-void Alias::handleCommand(const std::vector<std::string> &args) {
+ShellCommand::CommandStatus Alias::handleCommand(const std::vector<std::string> &args) {
     // args[0] is the command name
     // args[1] is the aliased cmd
     // args[2] is the new 
     if (args.size() != 3)
-        return;
+        return CommandFailure_BadParams;
     std::pair<std::string, std::string> alias(args[1], args[2]);
     mAliasDB.insert(alias);
+    return CommandSuccess;
 }

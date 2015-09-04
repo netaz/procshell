@@ -16,7 +16,15 @@
 
 class ShellCommand {
 public:
-    virtual void handleCommand(const std::vector<std::string> &args) = 0;
+    enum CommandStatus {
+        CommandSuccess,
+        CommandFailure,
+        CommandFailure_BadParams,
+        CommandFailure_MissingParams,
+    };
+    // Process a command from the edit line
+    // Return true if the command was successful, false otherwise
+    virtual CommandStatus handleCommand(const std::vector<std::string> &args) = 0;
     virtual const char* name() const = 0;
 };
 
