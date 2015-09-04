@@ -1,5 +1,6 @@
 /*
 * This file contains a sample shell
+* This sample attempts to show a more advanced shell, which is packaged as a class.
 *
 * For license information, please refer to procshell.h
 */
@@ -12,79 +13,73 @@
 #include "commands/cmd_history.h"
 #include "commands/cmd_exit.h"
 
-#ifdef _WIN32
-//#include "stdafx.h"
-#endif
+class Shell2 {
+    Terminal &mTerm;
+    LineEditor mEditor;
+    History mHistory;
+    CommandInterpreter mInterpreter;
+    AutoComplete *mAutoComplete;
+    Alias *mAlias;
+    bool mExit;
+    
+    void registerCmds();
+public:
+    Shell2(Terminal &term) : mTerm(term), mEditor(50), mHistory(10), mInterpreter(term), mExit(false) {
+        mAutoComplete = new AutoComplete(mInterpreter, term);
+        mAlias = new Alias(mInterpreter, term);
+    }
 
-/*
-* This sample shows how a shell with some basic functionality is assembled
-*
-*/
+    void run();
+};
 
-int shell(Terminal &term) {
-    LineEditor editor(50);
+void Shell2::registerCmds() {
+    ShellCommand *cmds[] = {
+        new HistoryCmd(mTerm, mHistory),
+        new ExitCmd(mTerm, mExit)
+    };
+
+    for (auto cmd : cmds) {
+        mInterpreter.registerCommand(*cmd);
+    }
+}
+
+void Shell2::run() {
+    registerCmds();
     KeyMap::TerminalAction action;
-    History history(10);
-    CommandInterpreter interpreter(term);
-    AutoComplete complete(interpreter, term);
-    HistoryCmd historyCmd(term, history);
-    bool exit;
-    ExitCmd exitCmd(term, exit);
-    Alias alias(interpreter, term);
-    interpreter.registerCommand(historyCmd);
-    interpreter.registerCommand(exitCmd);
 
-    while (!exit) {
-        action = term.collectInput(editor);
+    while (!mExit) {
+        action = mTerm.collectInput(mEditor);
 
         switch (action) {
         case KeyMap::TerminalAction::ACTION_UP:
         case KeyMap::TerminalAction::ACTION_DOWN:
-            term.clearInput(editor);
-            history.handleTerminalAction(action, editor);
+            mTerm.clearInput(mEditor);
+            mHistory.handleTerminalAction(action, mEditor);
             break;
         case KeyMap::TerminalAction::ACTION_AUTOCOMPLETE:
-            complete.handleTerminalAction(action, editor);
+            mAutoComplete->handleTerminalAction(action, mEditor);
             break;
 
         case KeyMap::TerminalAction::ACTION_ABORT:
-            term.LF(); term.CR();
-            editor.clear();
+            mTerm.LF(); mTerm.CR();
+            mEditor.clear();
             break;
 
         case KeyMap::TerminalAction::ACTION_DONE:
-            term.LF(); term.CR();
-            history.handleTerminalAction(action, editor);
-            alias.handleTerminalAction(action, editor);
-            interpreter.handleTerminalAction(action, editor);
-            editor.clear();
+            mTerm.LF(); mTerm.CR();
+            mHistory.handleTerminalAction(action, mEditor);
+            mAlias->handleTerminalAction(action, mEditor);
+            mInterpreter.handleTerminalAction(action, mEditor);
+            mEditor.clear();
             break;
         }
     }
-    return 0;
-}
-
-int LaunchLocalCLI() {
-
-    LocalTerminal term("machine> ", 0);
-    shell(term);
-    return EXIT_SUCCESS;
-}
-
-int TelnetServer();
-
-int LaunchTelnetCLI() {
-    int sock = TelnetServer();
-    if (0 == sock)
-        return EXIT_FAILURE;
-
-    TelnetTerminal term(sock, "kishkush>", 0);
-    shell(term);
-    return EXIT_SUCCESS;
 }
 
 int main(int argc, const char* argv[])
 {
-    //    return LaunchTelnetCLI();
-    return LaunchLocalCLI();
+    LocalTerminal term("shell2> ", 0);
+    Shell2 shell(term);
+    shell.run();
+    return EXIT_SUCCESS;
 }
