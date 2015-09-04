@@ -66,7 +66,7 @@ int shell(Terminal &term) {
 
 int LaunchLocalCLI() {
 
-    LocalTerminal term("machine> ", 0);
+    LocalTerminal term("shell1> ", 0);
     shell(term);
     return EXIT_SUCCESS;
 }
@@ -78,7 +78,7 @@ int LaunchTelnetCLI() {
     if (0 == sock)
         return EXIT_FAILURE;
 
-    TelnetTerminal term(sock, "kishkush>", 0);
+    TelnetTerminal term(sock, "telnet_sh> ", 0);
     shell(term);
     return EXIT_SUCCESS;
 }
