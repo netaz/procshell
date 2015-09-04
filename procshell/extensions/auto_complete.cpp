@@ -1,4 +1,5 @@
 #include "auto_complete.h"
+#include "../editor.h"
 
 bool AutoComplete::handleTerminalAction(KeyMap::TerminalAction action, LineEditor &editor) {
     if (KeyMap::TerminalAction::ACTION_AUTOCOMPLETE != action)
@@ -6,9 +7,9 @@ bool AutoComplete::handleTerminalAction(KeyMap::TerminalAction action, LineEdito
     
     std::vector<std::string> matches;
     if (mExactMatch)
-        matches = mInterpreter.find(editor.buf());
+        matches = mInterpreter.findCmd(editor.buf());
     else
-        matches = mInterpreter.approximate_find(editor.buf());
+        matches = mInterpreter.approximateFindCmd(editor.buf());
     if (matches.size() == 0)
         return false;
     mTerm.clearInput(editor);

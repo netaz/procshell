@@ -8,6 +8,7 @@
 #include <vector>
 #include "../procshell.h"
 #include "../extensions/auto_complete.h"
+#include "../extensions/alias.h"
 #include "../commands/cmd_history.h"
 #include "../commands/cmd_exit.h"
 
@@ -21,7 +22,7 @@
  */
 
 int shell(Terminal &term) {
-    LineEditor editor(15);
+    LineEditor editor(50);
     KeyMap::TerminalAction action;
     History history(10);
     CommandInterpreter interpreter(term);
@@ -29,6 +30,7 @@ int shell(Terminal &term) {
     HistoryCmd historyCmd(term, history);
     bool exit;
     ExitCmd exitCmd(term, exit);
+    Alias alias(interpreter, term);
     interpreter.registerCommand(historyCmd);
     interpreter.registerCommand(exitCmd);
 
@@ -53,6 +55,7 @@ int shell(Terminal &term) {
         case KeyMap::TerminalAction::ACTION_DONE:
             term.LF(); term.CR();
             history.handleTerminalAction(action, editor);
+            alias.handleTerminalAction(action, editor);
             interpreter.handleTerminalAction(action, editor);
             editor.clear();
             break;

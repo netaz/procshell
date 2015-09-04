@@ -57,6 +57,9 @@
     <ClInclude Include="commands\cmd_exit.h">
       <Filter>Source Files\commands</Filter>
     </ClInclude>
+    <ClInclude Include="extensions\alias.h">
+      <Filter>Source Files\extensions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windows.cpp">
@@ -94,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="examples\shell_example2.cpp">
       <Filter>Source Files\examples</Filter>
+    </ClCompile>
+    <ClCompile Include="extensions\alias.cpp">
+      <Filter>Source Files\extensions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

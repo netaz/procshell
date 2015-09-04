@@ -21,6 +21,7 @@ public:
     void set(const std::string &newBuf);
 
     const std::string& buf() const { return mLineBuf; }
+    std::string& buf() { return mLineBuf; }
     size_t cursor() const { return mCursor; }
 
 private:

@@ -8,19 +8,12 @@ bool CommandInterpreter::handleTerminalAction(KeyMap::TerminalAction action, Lin
     if (KeyMap::TerminalAction::ACTION_DONE != action)
         return false;
 
-    if (editor.buf().length() == 0)
+    std::vector<std::string> args = parseCmdLine(editor);
+    if (args.size() == 0)
         return false;
 
-    // parse the input line using SPACE separator
-    std::istringstream is(editor.buf());
-    std::string arg;
-    std::vector<std::string> args;
-    while (getline(is, arg, ' ')) {
-        if (arg.size() > 0) args.push_back(arg);
-    }
-
-    // find cmd matching first arg (command name)
-    // remove first arg and pass to cmd
+    // find cmd matching first arg (command name).
+    // remove first arg and pass to cmd.
     std::map<const char*, ShellCommand&>::iterator it = mCmds.begin();
     for (; it != mCmds.end(); it++) {
         if (0 == strcmp(it->first, args[0].c_str())) {
@@ -37,7 +30,39 @@ void CommandInterpreter::registerCommand(ShellCommand &cmd) {
     mCmds.insert( std::pair<const char*, ShellCommand&>(cmd.name(), cmd) );
 }
 
-std::vector<std::string> CommandInterpreter::find(const std::string &match) const {
+std::vector<std::string> CommandInterpreter::parseCmdLine(LineEditor &editor) {
+    std::vector<std::string> args;
+    if (editor.buf().length() == 0)
+        return args;
+
+    // parse the input line: space serves as a separator, but substrings in quatation mark are
+    // treated as whole substrings (not to be chopped up)
+    std::string arg;
+    std::string cmdline = editor.buf();
+    size_t pos = 0;
+    std::string delim = " \"";
+    while (1) {
+        size_t pos2 = cmdline.find_first_of(delim, pos);
+        if (pos2 - pos) {
+            arg = cmdline.substr(pos, pos2 - pos);
+            if (arg.size())
+                args.push_back(arg);
+        }
+        if (pos2 == std::string::npos)
+            break;
+        if (cmdline[pos2] == '\"' && delim.compare("\"") != 0)  {
+            delim = "\"";
+        }
+        else {
+            delim = " \"";
+        }
+        pos = pos2 + 1;
+    }
+
+    return args;
+}
+
+std::vector<std::string> CommandInterpreter::findCmd(const std::string &match) const {
     std::vector<std::string> ret;
     if (match.size() == 0)
         return ret;
@@ -51,7 +76,7 @@ std::vector<std::string> CommandInterpreter::find(const std::string &match) cons
     return ret;
 }
 
-size_t edit_distance(const char* a, const char *b) {
+static size_t edit_distance(const char* a, const char *b) {
     if (strlen(a) == 0)
         return strlen(b);
     if (strlen(b) == 0)
@@ -67,7 +92,7 @@ size_t edit_distance(const char* a, const char *b) {
                              1 + edit_distance(a+1, b) ));
 }
 
-std::vector<std::string> CommandInterpreter::approximate_find(const std::string &match) const {
+std::vector<std::string> CommandInterpreter::approximateFindCmd(const std::string &match) const {
     std::vector<std::string> ret;
     if (match.size() == 0)
         return ret;

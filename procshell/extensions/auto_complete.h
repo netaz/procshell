@@ -7,8 +7,8 @@
 #ifndef __AUTO_COMPLETE_H
 #define __AUTO_COMPLETE_H
 
-#include "../procshell.h"
 #include "../terminal.h"
+#include "../commands.h"
 
 /*
  * Command name completion

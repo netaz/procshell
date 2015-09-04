@@ -36,10 +36,11 @@ public:
     CommandInterpreter(Terminal &term) : mTerm(term) {}
     void registerCommand(ShellCommand &cmd);
     bool handleTerminalAction(KeyMap::TerminalAction action, LineEditor &editor);
+    
+    std::vector<std::string> parseCmdLine(LineEditor &editor);
     // Perform a partial string search and return all matches
-    std::vector<std::string> find(const std::string &match) const;
-
-    std::vector<std::string> approximate_find(const std::string &match) const;
+    std::vector<std::string> findCmd(const std::string &match) const;
+    std::vector<std::string> approximateFindCmd(const std::string &match) const;
 
 };
 

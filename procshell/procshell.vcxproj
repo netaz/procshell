@@ -83,6 +83,7 @@
     <ClInclude Include="editor.h" />
     <ClInclude Include="examples\stdafx.h" />
     <ClInclude Include="examples\targetver.h" />
+    <ClInclude Include="extensions\alias.h" />
     <ClInclude Include="extensions\auto_complete.h" />
     <ClInclude Include="history.h" />
     <ClInclude Include="keymap.h" />
@@ -96,6 +97,7 @@
     <ClCompile Include="examples\shell_example1.cpp" />
     <ClCompile Include="examples\shell_example2.cpp" />
     <ClCompile Include="examples\stdafx.cpp" />
+    <ClCompile Include="extensions\alias.cpp" />
     <ClCompile Include="extensions\auto_complete.cpp" />
     <ClCompile Include="history.cpp" />
     <ClCompile Include="keymap.cpp" />
