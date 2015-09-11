@@ -97,7 +97,7 @@ std::vector<std::string> CommandInterpreter::approximateFindCmd(const std::strin
     if (match.size() == 0)
         return ret;
 
-    size_t max_dist = std::min((int)match.size(), 1);
+    size_t max_dist = std::min((int)match.size(), MAX_EDIT_DISTANCE);
 
     std::map<const char*, ShellCommand&>::const_iterator it = mCmds.begin();
     for (; it != mCmds.end(); it++) {

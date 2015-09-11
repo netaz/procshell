@@ -40,14 +40,18 @@ struct string_cmp {
 class CommandInterpreter : public TerminalListener {
     Terminal &mTerm;
     std::map<const char*, ShellCommand&, string_cmp> mCmds;
+    const int MAX_EDIT_DISTANCE = 1;
 public:
     CommandInterpreter(Terminal &term) : mTerm(term) {}
     void registerCommand(ShellCommand &cmd);
     bool handleTerminalAction(KeyMap::TerminalAction action, LineEditor &editor);
     
     std::vector<std::string> parseCmdLine(LineEditor &editor);
-    // Perform a partial string search and return all matches
+    // Perform an exact, partial string search (based on the prefix of the command typed in so far) 
+    // and return all matches
     std::vector<std::string> findCmd(const std::string &match) const;
+    // Perform an approximate ("fuzzy") string search (based on full string entered) 
+    // and return all matches
     std::vector<std::string> approximateFindCmd(const std::string &match) const;
 
 };
